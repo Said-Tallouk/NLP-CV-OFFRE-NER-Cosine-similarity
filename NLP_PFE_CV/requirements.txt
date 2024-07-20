@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+streamlit
+wordcloud
+matplotlib
+seaborn
+joblib
+plotly
+gensim
+nltk
+IPython
+gensim
+PyPDF2
+Courses

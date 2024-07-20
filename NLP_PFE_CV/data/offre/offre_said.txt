@@ -1,0 +1,9 @@
+job tille : data science
+compétence: 
+Maîtrise de Python, R, PHP, C, C++.
+Expérience avec les bibliothèques de traitement de données telles que Pandas, Numpy, et Scikit-learn.
+Bonne connaissance des outils de visualisation tels que Matplotlib, Seaborn, et Tableau.
+Expérience dans le développement web avec des frameworks comme Django, Laravel, et Angular.
+Compétences en gestion de bases de données avec des technologies comme MongoDB et HBase.
+Maîtrise des méthodes de modélisation et de conception de données comme UML et Merise.
+Connaissance des outils de contrôle de version comme Git et GitHub.

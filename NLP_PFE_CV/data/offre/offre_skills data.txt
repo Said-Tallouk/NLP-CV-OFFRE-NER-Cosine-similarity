@@ -1,0 +1,13 @@
+Required Skills:
+Proficiency in programming languages such as Python, R, and SQL.
+Hands-on experience with Python libraries such as pandas, NumPy, scikit-learn, 
+matplotlib, and seaborn.
+Strong understanding of data mining techniques, data preprocessing, and feature 
+engineering.
+In-depth knowledge of statistical modeling and machine learning methods, including 
+regression, classification, clustering, and deep learning.
+Ability to work with large databases and efficiently manipulate complex datasets.
+Excellent communication skills and ability to present analytical results clearly and 
+concisely.
+University degree in computer science, statistics, applied mathematics, or a related field. 
+A postgraduate degree in data science or a similar field is a plus

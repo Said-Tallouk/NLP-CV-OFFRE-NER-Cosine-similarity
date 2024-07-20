@@ -1,0 +1,56 @@
+import streamlit as st
+from joblib import load
+from sklearn.metrics.pairwise import cosine_similarity
+from nltk.tokenize import word_tokenize
+import PyPDF2
+import plotly.graph_objects as go
+
+model = load('model.joblib')
+st.title('CV and Job Offer Similarity Calculator')
+st.markdown('---')
+
+
+st.sidebar.image("cv/images/2.png", use_column_width=True)
+st.sidebar.markdown('<p style="font-size: 16px; color: #555; text-align: center;">Created by said Tallouk</p>', unsafe_allow_html=True)
+with st.expander("Upload your CV (PDF file):"):
+    cv_file = st.file_uploader("CV File", key="cv_file")
+st.markdown('---')
+
+with st.expander("Upload the job offer (PDF file):"):
+    offer_file = st.file_uploader("Offer File", key="offer_file")
+
+st.markdown('---')
+
+def extract_text_from_pdf(file):
+    text = ""
+    reader = PyPDF2.PdfReader(file)
+    for page_number in range(len(reader.pages)):
+        page = reader.pages[page_number]
+        text += page.extract_text()
+    return text
+
+def calculate_similarity(offer_text, cv_text):
+    offer_tokens = word_tokenize(offer_text.lower())
+    cv_tokens = word_tokenize(cv_text.lower())
+
+    offer_vector = sum(model.wv.get_vector(token) for token in offer_tokens if token in model.wv.key_to_index) / len(offer_tokens)
+    cv_vector = sum(model.wv.get_vector(token) for token in cv_tokens if token in model.wv.key_to_index) / len(cv_tokens)
+
+    similarity_score = cosine_similarity(offer_vector.reshape(1, -1), cv_vector.reshape(1, -1))[0][0]
+    return similarity_score
+
+if st.button('Click the button here to find out your chance of acceptance') and cv_file is not None and offer_file is not None:
+    cv_text = extract_text_from_pdf(cv_file)
+    offer_text = extract_text_from_pdf(offer_file)
+    similarity_score = calculate_similarity(offer_text, cv_text)
+    st.write(f'Similarity with job offer: {similarity_score:.2f}')
+
+    fig = go.Figure(go.Indicator(
+        mode = "gauge+number",
+        value = similarity_score * 100,  # Multiplying by 100 to get percentage
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        title = {'text': "Match with offer"}))
+
+    st.plotly_chart(fig)
+
+    st.markdown('---')
